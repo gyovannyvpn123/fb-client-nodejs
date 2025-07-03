@@ -1,0 +1,24 @@
+{
+  "name": "fb-client-nodejs",
+  "version": "1.0.0",
+  "description": "Lightweight Node.js client library for Facebook Messenger using access tokens",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/fb-client-nodejs.git"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "keywords": [
+    "facebook",
+    "messenger",
+    "client",
+    "bot",
+    "token",
+    "nodejs"
+  ],
+  "dependencies": {
+    "axios": "^1.4.0",
+    "form-data": "^4.0.0"
+  }
+}
