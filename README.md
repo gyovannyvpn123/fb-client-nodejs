@@ -23,7 +23,7 @@ npm install fb-client-nodejs
 
 # A nodejs library that supports Facebook login with an access token without email and password authentication 
 # Example use :
-# Example bot : const MessengerClient = require('./index');
+ Example bot : const MessengerClient = require('./index');
 const fs = require('fs');
 
 const token = 'EAAA...';
