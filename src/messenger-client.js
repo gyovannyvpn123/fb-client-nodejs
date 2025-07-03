@@ -9,6 +9,9 @@ const { sendReaction } = require('./reactions');
 const { sendSticker } = require('./sticker-send');
 const { getUserInfo } = require('./user-info');
 const { replyToMessage } = require('./reply-message');
+const fs = require('fs');
+const axios = require('axios');
+const FormData = require('form-data');
 
 class MessengerClient {
   constructor(token) {
@@ -80,6 +83,28 @@ class MessengerClient {
       throw new Error('Thread ID, message and replyMessageId are required');
     }
     return await replyToMessage(this.token, threadId, message, replyMessageId);
+  }
+
+  /**
+   * Send a photo (image file) using Graph API directly.
+   */
+  async sendPhoto(threadId, filePath) {
+    if (!threadId || !filePath) throw new Error('Thread ID and file path required');
+    if (!fs.existsSync(filePath)) throw new Error('Image file not found at path: ' + filePath);
+
+    const form = new FormData();
+    form.append('recipient', JSON.stringify({ thread_key: threadId }));
+    form.append('message', JSON.stringify({ attachment: { type: 'image', payload: {} } }));
+    form.append('filedata', fs.createReadStream(filePath));
+
+    const headers = {
+      Authorization: `Bearer ${this.token}`,
+      ...form.getHeaders()
+    };
+
+    const url = 'https://graph.facebook.com/v18.0/me/messages';
+    const response = await axios.post(url, form, { headers });
+    return response.data;
   }
 }
 
