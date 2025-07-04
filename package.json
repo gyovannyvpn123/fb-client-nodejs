@@ -1,6 +1,6 @@
 {
   "name": "fb-client-nodejs",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Lightweight Node.js client library for Facebook Messenger",
   "main": "index.js",
   "repository": {
